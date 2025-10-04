@@ -1,0 +1,10 @@
+# Default configuration for Aider
+# Switch model/api_base depending on your setup
+
+# Example: OpenRouter
+model: openrouter/anthropic/claude-3.5-sonnet
+editor: nano
+
+# Example: Ollama
+# model: ollama/llama3
+# api_base: http://host.docker.internal:11434/v1

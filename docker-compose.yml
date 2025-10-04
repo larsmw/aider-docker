@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  aider-openrouter:
+    build: .
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+    tty: true
+    stdin_open: true
+    command: ["--model", "openrouter/anthropic/claude-3.5-sonnet"]
+
+  aider-ollama:
+    build: .
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    tty: true
+    stdin_open: true
+    command: ["--model", "ollama/llama3", "--api-base", "http://host.docker.internal:11434/v1"]
