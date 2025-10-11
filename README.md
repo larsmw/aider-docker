@@ -93,4 +93,4 @@ docker build --no-cache -t aider .
   - OpenRouter: https://openrouter.ai/models  
   - Ollama: https://ollama.com/library
 
-See more on my website|https://www.linkhub.dk/how-run-aider-ai-chat-docker-linux
+See more on [my website](https://www.linkhub.dk/how-run-aider-ai-chat-docker-linux)
