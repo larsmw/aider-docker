@@ -1,10 +1,10 @@
-# Default configuration for Aider
-# Switch model/api_base depending on your setup
+# Default configuration for Aider. Keys are aider's command-line options without the leading dashes.
+# Aider reads this file from your home directory, the root of the git repo and the current directory.
 
-# Example: OpenRouter
-model: openrouter/anthropic/claude-3.5-sonnet
-editor: nano
+# Example: OpenRouter (needs OPENROUTER_API_KEY in the environment)
+model: openrouter/anthropic/claude-sonnet-4.6
+editor: nano          # used by the /editor command
 
-# Example: Ollama
-# model: ollama/llama3
-# api_base: http://host.docker.internal:11434/v1
+# Example: Ollama. The address comes from OLLAMA_API_BASE (docker-compose.yml sets it);
+# there is no api_base key, because aider has no such option.
+# model: ollama_chat/qwen2.5-coder:7b

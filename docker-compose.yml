@@ -1,22 +1,30 @@
-version: "3.9"
-
 services:
   aider-openrouter:
     build: .
+    image: aider
     volumes:
-      - .:/workspace
+      # The git repository aider should work on (default: this directory).
+      - ${PROJECT_DIR:-.}:/workspace
     working_dir: /workspace
     environment:
-      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENROUTER_API_KEY
     tty: true
     stdin_open: true
-    command: ["--model", "openrouter/anthropic/claude-3.5-sonnet"]
+    command: ["--model", "openrouter/${OPENROUTER_MODEL:-anthropic/claude-sonnet-4.6}"]
 
   aider-ollama:
     build: .
+    image: aider
     volumes:
-      - .:/workspace
+      - ${PROJECT_DIR:-.}:/workspace
     working_dir: /workspace
+    # On Linux, host.docker.internal only exists when you add it (Docker Desktop resolves it by itself).
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      # Aider reads the Ollama address from OLLAMA_API_BASE (no /v1). It has no --api-base option.
+      - OLLAMA_API_BASE=http://host.docker.internal:11434
     tty: true
     stdin_open: true
-    command: ["--model", "ollama/llama3", "--api-base", "http://host.docker.internal:11434/v1"]
+    # Aider recommends ollama_chat/ over ollama/.
+    command: ["--model", "ollama_chat/${OLLAMA_MODEL:-qwen2.5-coder:7b}"]
